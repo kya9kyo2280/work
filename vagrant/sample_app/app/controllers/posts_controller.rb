@@ -6,12 +6,23 @@ class PostsController < ApplicationController
   def create
   	  post = Post.new(post_params)
   	  post.save
-  	  redidirect_to '/top'
+  	  redirect_to post_path(post.id)
   end
+  def index
+     @posts = Post.all
+  end
+
+   def show
+    @post = Post.find(params[:id])
+   end
 
   private
 
+
   def post_params
-  	  paramas.require(:post).permit(:title,:body)
+  	  params.require(:post).permit(:title,:body)
   end
+
+
+
 end
